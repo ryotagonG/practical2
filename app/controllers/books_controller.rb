@@ -5,6 +5,7 @@ before_action :authenticate_user!
   end
 
   def index
+    @book = Book.new
     @books = Book.all
   end
 
@@ -43,7 +44,7 @@ before_action :authenticate_user!
   private
 
   def book_params
-    params.require(:book).permit(:title)
+    params.require(:book).permit(:title, :body)
   end
 
 end
