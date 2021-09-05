@@ -29,10 +29,20 @@
             <% end %>
             <%= @book.favorites.count %>
           </td>
+
+          <td>コメント数: <%= @book.book_comments.count %></td>
+
         <% if @book.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
           <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
         <% end %>
+
+          <td>
+            <% @comments.each do |comment| %>
+            <%= comment.body %><br>
+            <% end %>
+          </td>
+          <%= render 'layouts/errors', obj: @book %>
           <td>
             <%= form_with(model:@comment, url:book_book_comments_path(@book.id), method: :post, local: true, class: "message-form") do |f| %>
             <%= f.text_area :body %>

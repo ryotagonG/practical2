@@ -5,7 +5,10 @@ class BookCommentsController < ApplicationController
     if comment.save
       redirect_to book_path(@book)
     else
-      flash.now[:alert] = "コメントを入力してください"
+      @comments = @book.book_comments.order(created_at: :desc)
+      @newbook = Book.new
+      @comment = BookComment.new
+      render "books/show"
     end
   end
   
