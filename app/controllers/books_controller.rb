@@ -3,6 +3,8 @@ before_action :authenticate_user!
   def show
     @book = Book.find(params[:id])
     @newbook = Book.new
+    @comment = BookComment.new
+    @comments = @book.book_comments.order(created_at: :desc)
   end
 
   def index
