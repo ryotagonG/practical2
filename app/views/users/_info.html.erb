@@ -8,12 +8,15 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
-    <th>
-      <%= link_to user_relationships_path(user), method: :post do %>
-
-      <% end %>
-    </th>
-          <% if user != current_user %>
+  <tr>
+    <th>follows</th>
+    <th><%= link_to user.followings.count, followings_user_path(user) %></th>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th><%= link_to user.followers.count, followers_user_path(user) %></th>
+  </tr>
+      <% if user != current_user %>
         <th>
           <% if user.is_followed_by?(current_user) %>
             <%= link_to user_relationships_path(user), method: :delete do %>
@@ -25,8 +28,7 @@
             <% end %>
           <% end %>
         </th>
-          <% end %>
-
+      <% end %>
   </tr>
 </table>
 
