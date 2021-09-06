@@ -8,6 +8,26 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+    <th>
+      <%= link_to user_relationships_path(user), method: :post do %>
+
+      <% end %>
+    </th>
+          <% if user != current_user %>
+        <th>
+          <% if user.is_followed_by?(current_user) %>
+            <%= link_to user_relationships_path(user), method: :delete do %>
+              <button class="btn btn-primary">フォローを外す</button>
+            <% end %>
+          <% else %>
+            <%= link_to user_relationships_path(user), method: :post do %>
+              <button class="btn btn-primary">フォローする</button>
+            <% end %>
+          <% end %>
+        </th>
+          <% end %>
+
+  </tr>
 </table>
 
 <div class='row'>

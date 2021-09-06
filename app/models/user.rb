@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
   
+  
+  
   attachment :profile_image, destroy: false
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
@@ -21,5 +23,9 @@ class User < ApplicationRecord
   
   def already_favorited?(book)
     self.favorites.exists?(book_id: book.id)
+  end
+  
+  def is_followed_by?(user)
+    reverse_of_relationships.find_by(following_id: user.id).present?
   end
 end
