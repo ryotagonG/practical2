@@ -7,6 +7,10 @@
       <%= render 'books/form', book: @book %>
     </div>
     <div class='col-md-8 offset-md-1'>
+    <%= form_tag(_path,:method => 'get') do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag '検索', :name => nil %>
+    <% end %>
       <h2>Books</h2>
       <%= render 'books/index', books: @books%>
     </div>
