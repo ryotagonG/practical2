@@ -1,1 +1,10 @@
+<%= render 'searches/form' %>
 <h2>Books search for "test"</h1>
+
+<% if @model == 'user' %>
+  <%= @content %></h3>
+    <%= render 'users/index', users: @records %>
+<% else @model == 'books' %>
+  <%= @content %></h3>
+    <%= render 'books/index', posts: @records %>
+<% end %>
